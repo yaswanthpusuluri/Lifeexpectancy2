@@ -1,6 +1,7 @@
-# app.py
+ # app.py
 
 from fastapi import FastAPI
+from fastapi.responses import RedirectResponse
 import pickle
 import pandas as pd
 
@@ -11,10 +12,9 @@ with open("model.pkl", "rb") as f:
     model = pickle.load(f)
 
 
-@app.get("/")
-def home():
-    return {"message": "Life Expectancy Prediction API is running"}
-
+@app.get('/')
+def get():
+    return RedirectResponse(url='/docs')
 
 @app.post("/predict")
 def predict(data: dict):
